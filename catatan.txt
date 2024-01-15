@@ -1,0 +1,10 @@
+1. cara buat swiperjs
+https://ionicacademy.com/swiper-ionic-7-ion-slides/
+2. ionic storege
+  npm install @ionic/storage-angular
+  app.module.ts
+  import { IonicStorageModule } from '@ionic/storage-angular';
+  imports: [
+    IonicStorageModule.forRoot(),
+    ...
+  ]

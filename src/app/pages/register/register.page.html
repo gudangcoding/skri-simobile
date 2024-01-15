@@ -1,0 +1,16 @@
+<ion-content>
+  <div class="bg_image main_content_div" [style.backgroundImage]="'url(assets/imgs/back2.jpg)'">
+    <div class="overlay">
+      <div>
+        <ion-input type="text" placeholder="name" [(ngModel)]="name"></ion-input>
+        <ion-input type="text" placeholder="email" [(ngModel)]="email"></ion-input>
+        <ion-input type="text" placeholder="Password" [(ngModel)]="password"></ion-input>
+        <ion-input type="text" placeholder="Confirm Password" [(ngModel)]="c_password"></ion-input>
+        <ion-button expand="block" class="block_btn" (click)="daftar()">
+          Register
+        </ion-button>
+        <ion-label class="bottom_lbl" (click)="goToLogin()">Already have an account? Login</ion-label>
+      </div>
+    </div>
+  </div>
+</ion-content>
