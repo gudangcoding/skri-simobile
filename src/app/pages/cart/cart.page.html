@@ -16,16 +16,20 @@
 
       <div class="select_div">
         <div class="inner_flex">
-          <ion-checkbox mode="md"></ion-checkbox>
-          <ion-label>Sell all items</ion-label>
+          <ion-checkbox mode="md" (click)="checkAll()"></ion-checkbox>
+          <ion-label >Sell all items</ion-label>
         </div>
-        <ion-label class="red_lbl">Delete</ion-label>
+        <ion-label class="red_lbl" >
+          <ion-button (click)="deleteAllItems()">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </ion-label>
       </div>
 
       <!-- <div class="pro_div" *ngFor="let item of (products| slice: 0:3)"> -->
       <div class="pro_div" *ngFor="let item of isikeranjang">
         <div class="pro_flex">
-          <ion-checkbox mode="md"></ion-checkbox>
+          <ion-checkbox mode="md" [(ngModel)]="item.checked"></ion-checkbox>
           <div class="pro_image" [style.backgroundImage]="'url('+item.gambar+')'">
 
           </div>
