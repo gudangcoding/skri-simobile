@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class RestApi {
-  server: string = 'https://laravel10kasir.app/api/';
-  gambar: string = 'https://laravel10kasir.app/public/';
+  server: string = 'https://kasir.app/api/';
+  gambar: string = 'https://kasir.app/public/';
 
   constructor(public http: HttpClient) {}
 

@@ -20,14 +20,14 @@
           <ion-label >Sell all items</ion-label>
         </div>
         <ion-label class="red_lbl" >
-          <ion-button (click)="deleteAllItems()">
+          <ion-button  (click)="deleteAllItems()">
             <ion-icon slot="icon-only" name="trash"></ion-icon>
           </ion-button>
         </ion-label>
       </div>
 
       <!-- <div class="pro_div" *ngFor="let item of (products| slice: 0:3)"> -->
-      <div class="pro_div" *ngFor="let item of isikeranjang">
+      <div class="pro_div" *ngFor="let item of isikeranjang; let i = index">
         <div class="pro_flex">
           <ion-checkbox mode="md" [(ngModel)]="item.checked"></ion-checkbox>
           <div class="pro_image" [style.backgroundImage]="'url('+item.gambar+')'">
@@ -40,11 +40,11 @@
         </div>
         <div class="cart_box">
           <div style="background: var(--ion-color-app-grey);">
-            <ion-icon name="remove-sharp" color="dark"></ion-icon>
+            <ion-icon name="remove-sharp" color="dark" (click)="removeFromCart(i)"></ion-icon>
           </div>
           <ion-label>1</ion-label>
           <div>
-            <ion-icon name="add-sharp"></ion-icon>
+            <ion-icon name="add-sharp" (click)=" addToCart()"></ion-icon>
           </div>
         </div>
       </div>

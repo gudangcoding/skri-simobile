@@ -9,9 +9,15 @@ import { Sesi } from 'src/provider/Sesi';
   templateUrl: './cart.page.html',
   styleUrls: ['./cart.page.scss'],
 })
+
 export class CartPage implements OnInit {
+
   isikeranjang: any = [];
   products = [];
+
+  cartItems: any[] = [];
+  totalItems: number = 0;
+  
 
   constructor(private dummy: DummyService, private router: Router, private sesi: Sesi) {
     this.products = this.dummy.products;
@@ -33,19 +39,7 @@ export class CartPage implements OnInit {
 
 
   checkAll() {
-   
     this.isikeranjang.forEach(item => (item.checked = !item.checked));
-  }
-
-  delall() {
-    const storedItems = JSON.stringify(this.isikeranjang);
-    for (let index = 0; index < this.isikeranjang.length; index++) {
-      // console.log(index);
-      localStorage.removeItem(this.isikeranjang[index]);
-      // console.log(this.isikeranjang[index].id_produk);
-      // this.deleteItemById(this.isikeranjang[index].id_produk);
-
-    }
   }
 
   deleteItemById(itemId: number) {
@@ -66,22 +60,38 @@ export class CartPage implements OnInit {
   }
 
   deleteAllItems() {
-    let total = this.isikeranjang.forEach(item => (item.checked = true)).length;
-  
-    // Get current data from Local Storage
-    const storedItemsString = localStorage.getItem('cartItems');
-    if (storedItemsString) {
-      const storedItems = JSON.parse(storedItemsString);
-      const checkedCount = storedItems.filter(item => item.checked).length;
-      console.log(checkedCount);
-
-      // Loop through each item and remove it
-      for (let i = checkedCount - 1; i >= 0; i--) {
-        storedItems.splice(i, 1);
+    
+    if (this.isikeranjang) {
+      const jumlahdiceklis = this.isikeranjang.filter(item => item.checked).length;
+      // Hapus berdasarkan produk yang di ceklis
+      for (let i = jumlahdiceklis - 1; i >= 0; i--) {
+        this.isikeranjang.splice(i, 1);
       }
-
-      // Save the updated data back to Local Storage
-      localStorage.setItem('cartItems', JSON.stringify(storedItems));
+      // Update Storage
+      localStorage.setItem('cartItems', JSON.stringify(this.isikeranjang));
     }
+  }
+
+
+  //baru
+  addToCart() {
+    this.cartItems.push({ name: 'nama_produk', quantity: 1 });
+    this.updateCart();
+  }
+
+  removeFromCart(index: number) {
+    this.cartItems.splice(index, 1);
+    this.updateCart();
+  }
+
+  updateCart() {
+    this.totalItems = this.cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+  }
+
+  loadCart() {
+    const storedCart = localStorage.getItem('cartItems');
+    this.cartItems = storedCart ? JSON.parse(storedCart) : [];
+    this.totalItems = this.cartItems.reduce((acc, item) => acc + item.quantity, 0);
   }
 }
